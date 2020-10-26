@@ -5,8 +5,8 @@ import {
   Text,
   TouchableOpacity,
   Dimensions,
+  Image,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { WHITE } from '../Visuality/colors';
 
 const styles = StyleSheet.create({
@@ -34,6 +34,14 @@ const styles = StyleSheet.create({
   icon: {
     marginLeft: 4,
   },
+  topText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  arrow: {
+    height: 30,
+    width: 20,
+  },
 });
 
 function List(props) {
@@ -42,19 +50,21 @@ function List(props) {
     if (serial === 1) {
       return (
         <View style={styles.icon}>
-          <Text>Top</Text>
+          <Text style={styles.topText}>Top</Text>
         </View>
-      )
+      );
     } else {
       return (
         <TouchableOpacity
           style={styles.icon}
           onPress={() => bringToTop(serial)}>
-          <Text>Icon</Text>
+          <Image
+            source={require('../assets/arrow_up.png')}
+            style={styles.arrow}
+          />
         </TouchableOpacity>
       );
     }
-    // return <Icon name="arrow-up" size={25} />;
   };
 
   if (serial <= shownData) {

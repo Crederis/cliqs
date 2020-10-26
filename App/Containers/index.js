@@ -31,6 +31,14 @@ const styles = StyleSheet.create({
   addData: {
     marginVertical: 12,
   },
+  refreshText: {
+    color: BLACK_TEXT,
+    fontSize: 14,
+  },
+  button: {
+    marginTop: 12,
+    marginHorizontal: 12,
+  },
 });
 
 function Home(props) {
@@ -118,6 +126,10 @@ function Home(props) {
     setPopUpVisibility(false);
   };
 
+  const refreshControl = () => {
+    return <RefreshControl refreshing={refreshStatus} onRefresh={onRefresh} />;
+  };
+
   if (listData) {
     return (
       <SafeAreaView style={styles.container}>
@@ -129,8 +141,7 @@ function Home(props) {
         <View style={styles.title}>
           <Text style={styles.titleText}>Who's on top?</Text>
         </View>
-        <ScrollView>
-          <RefreshControl refreshing={refreshStatus} onRefresh={onRefresh} />
+        <ScrollView refreshControl={refreshControl()}>
           <FlatList
             data={listData}
             extraData={listData}
@@ -138,12 +149,16 @@ function Home(props) {
             renderItem={({ item, index }) => renderItem({ item, i: index })}
           />
           <View style={{ alignItems: 'center' }}>
-            <Text style={{ color: BLACK_TEXT, fontSize: 14 }}>
+            <Text style={styles.refreshText}>
               Swipe to refresh
-          </Text>
+            </Text>
           </View>
           {addData ? (
-            <Button text={'Show more data'} onPress={() => resetLimit()} style={{ marginTop: 12, marginHorizontal: 12 }} />
+            <Button
+              text={'Show more data'}
+              onPress={() => resetLimit()}
+              style={styles.button}
+            />
           ) : (
               <View />
             )}
