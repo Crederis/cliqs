@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { REQUEST_LIST_DATA, receiveListData } from '../action/Lists';
+import { REQUEST_LIST_DATA, receiveListData } from '../redux/action/Lists';
 import { getList } from '../api';
 
 function* getData() {
@@ -8,6 +8,7 @@ function* getData() {
     yield put(receiveListData(response.value));
   } catch (e) {
     // yield put(console.log(e));
+    console.log(e);
   }
 }
 

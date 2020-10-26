@@ -18,32 +18,26 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 8,
     marginVertical: 4,
-    // height: 100,
   },
   content: {
     flexDirection: 'row',
     maxWidth: Dimensions.get('screen').width * 0.75,
-    // backgroundColor: 'blue',
     padding: 8,
-    // flex: 30,
   },
   serial: {
     justifyContent: 'center',
     flex: 1,
   },
   text: {
-    // marginLeft: 2,
-    // maxWidth: Dimensions.get('screen').width * 0.6,
     flex: 12,
   },
   icon: {
     marginLeft: 4,
-    // flex: 1,
   },
 });
 
 function List(props) {
-  const { serial, text, shownData, bringToTop } = props;
+  const { serial, text, shownData, bringToTop, onPress } = props;
   const LeftIcon = ({ serial }) => {
     if (serial === 1) {
       return (
@@ -66,7 +60,7 @@ function List(props) {
   if (serial <= shownData) {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.content}>
+        <TouchableOpacity style={styles.content} onPress={() => onPress(text)}>
           <View style={styles.serial}>
             <Text>{serial}</Text>
           </View>
